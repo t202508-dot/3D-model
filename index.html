@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1020">
+  <title>학부모 연락처 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="scene" aria-hidden="true"></canvas>
+
+  <header class="top">
+    <div class="brand"><span class="logo">◆</span> 학부모 연락처 <b>3D</b></div>
+    <button id="openData" class="ghost" type="button">📥 데이터 <span id="dataBadge" class="badge">0</span></button>
+  </header>
+
+  <main class="center">
+    <form id="searchForm" class="search" autocomplete="off">
+      <input id="q" type="search" placeholder="학생 이름 검색 (예: 김민수)" enterkeyhint="search" aria-label="학생 이름">
+      <button type="submit">검색</button>
+    </form>
+    <p id="hint" class="hint">먼저 <b>📥 데이터</b>에서 연락처·문자를 불러오세요.</p>
+  </main>
+
+  <nav id="carouselNav" class="carousel-nav" hidden>
+    <button id="prev" type="button" aria-label="이전">‹</button>
+    <span id="pager">1 / 1</span>
+    <button id="next" type="button" aria-label="다음">›</button>
+  </nav>
+
+  <section id="results" class="results" aria-live="polite"></section>
+
+  <!-- 상세 시트 -->
+  <div id="sheet" class="sheet" hidden>
+    <div class="sheet-card">
+      <button class="close" data-close="sheet" type="button" aria-label="닫기">✕</button>
+      <div id="sheetRole" class="role-pill">어머니</div>
+      <h2 id="sheetTitle">김민수 학생 학부모</h2>
+      <p id="sheetName" class="muted"></p>
+      <a id="sheetPhone" class="big-phone" href="#">010-0000-0000</a>
+      <div class="actions">
+        <a id="actCall" class="btn call" href="#">📞 전화</a>
+        <a id="actSms" class="btn sms" href="#">💬 문자</a>
+        <button id="actCopy" class="btn" type="button">📋 복사</button>
+      </div>
+      <h3>찾은 근거</h3>
+      <ul id="sheetEvidence" class="evidence"></ul>
+    </div>
+  </div>
+
+  <!-- 데이터 패널 -->
+  <div id="dataPanel" class="modal" hidden>
+    <div class="modal-card">
+      <button class="close" data-close="dataPanel" type="button" aria-label="닫기">✕</button>
+      <h2>데이터 불러오기</h2>
+      <p class="muted">모든 데이터는 <b>이 기기 안에서만</b> 처리되며 어디에도 전송되지 않습니다.</p>
+
+      <div class="stats"><div><b id="statContacts">0</b><span>연락처</span></div><div><b id="statMessages">0</b><span>문자</span></div></div>
+
+      <h3>📇 전화번호부</h3>
+      <button id="pickContacts" class="btn wide" type="button">휴대폰 연락처에서 바로 가져오기</button>
+      <p id="pickNote" class="note"></p>
+      <label class="btn wide file">연락처 파일 (.vcf / .csv)<input id="fileContacts" type="file" accept=".vcf,.vcard,.csv,text/vcard,text/csv" multiple></label>
+
+      <h3>💬 문자 메시지</h3>
+      <label class="btn wide file">문자 백업 파일 (.xml / .txt)<input id="fileMessages" type="file" accept=".xml,.txt,text/xml,text/plain" multiple></label>
+      <p class="note">브라우저는 보안상 문자함을 직접 읽을 수 없어요. 안드로이드는 <b>SMS Backup &amp; Restore</b> 앱으로 XML 백업을 만든 뒤 불러오거나, 문자 내용을 아래에 붙여넣으세요.</p>
+      <textarea id="pasteBox" rows="4" placeholder="예)&#10;010-1234-5678&#10;선생님 안녕하세요, 김민수 엄마입니다."></textarea>
+      <button id="pasteAdd" class="btn wide" type="button">붙여넣은 문자 추가</button>
+
+      <h3>⚙️ 관리</h3>
+      <label class="check"><input id="persist" type="checkbox"> 이 기기에 저장 (다음에 열어도 유지)</label>
+      <div class="row">
+        <button id="loadSample" class="btn" type="button">🧪 샘플로 체험</button>
+        <button id="clearData" class="btn danger" type="button">🗑 모두 지우기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="vendor/three.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

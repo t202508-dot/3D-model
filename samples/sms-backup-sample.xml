@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<smses count="3">
+  <sms protocol="0" address="+821033218811" date="1700000000000" type="1" body="선생님 안녕하세요. 최유진 엄마입니다. 내일 체험학습 동의서 보낼게요!" contact_name="(Unknown)" />
+  <sms protocol="0" address="01050902234" date="1700000500000" type="1" body="안녕하세요 조은우 아버지입니다. 방과후 신청 문의드려요." contact_name="은우아버지" />
+  <sms protocol="0" address="010-2481-3301" date="1700001000000" type="2" body="민수 어머님, 다음 주 화요일 상담 일정 확인 부탁드립니다." contact_name="김민수 엄마" />
+</smses>
